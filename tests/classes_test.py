@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 
 import sys
-sys.path.append("..")
+sys.path.append("../src")
 
-from src.classes import *
+from classes import *
 
-a = Grid(4, 2)
-a.add_bombs(3)
+a = Grid(10, 7)
+a.add_bombs(20)
 print(a)

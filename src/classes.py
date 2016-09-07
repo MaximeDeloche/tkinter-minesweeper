@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import random
+import utils
 
 class Square:
     """ A square of the game """
@@ -48,8 +49,10 @@ class Grid:
 
             for (i, j) in pos:
                 self.squares[i][j].is_bomb = True
-                # TODO => add one the the neighbours
-                    
+                for (x, y) in utils.neighbours(i, j):
+                    if x in range(self.height) and y in range(self.width):
+                        self.squares[x][y].number += 1
+
 
 
     def __str__(self):
@@ -57,12 +60,10 @@ class Grid:
         for i in range(self.height):
             for j in range(self.width):
                 if self.squares[i][j].is_bomb:
-                    res += "X"
+                    res += "."
                 else:
                     res += str(self.squares[i][j].number)
             res += "\n"
         return res
 
 
-
-        
