@@ -3,6 +3,7 @@
 
 import random
 import utils
+       
 
 class Square:
     """ A square of the game """
