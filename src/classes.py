@@ -9,16 +9,24 @@ class Square:
 
     def __init__(self):
         self.is_bomb = False
+        self.revealed = False
         self.number = 0
+
+    def left_click(self):
+        self.revealed = True
+        if self.is_bomb:
+            print("BOMB")
+        else:
+            print("OK, ", self.number)
 
 
 
 class Grid:
     """ A grid of the game, containing Squares """
 
-    def __init__(self, width, height):
-        self.width = width
+    def __init__(self, height, width):
         self.height = height
+        self.width = width
         self.bombs = 0
         self.squares = list()
 
