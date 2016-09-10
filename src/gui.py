@@ -29,6 +29,9 @@ window.config(menu=menubar)
 main_frame = Frame(window, borderwidth=2, relief=SUNKEN)
 main_frame.pack(padx=10, pady=10)
 
+# images
+flag = PhotoImage(file="red_flag.gif")
+mine = PhotoImage(file="mine.gif")
 
 # click handlings => package ?
 def __left_handler(event, row, column):
@@ -36,7 +39,9 @@ def __left_handler(event, row, column):
         if event.widget["image"] == "":
             (is_bomb, number) = grid.squares[row][column].left_click()
             if is_bomb:
-                print("PERDU PUTAIN")
+                event.widget["state"] = "normal"
+                event.widget["image"] = mine
+
             else:
                 event.widget["text"] = number
             event.widget["relief"] = SUNKEN
@@ -52,7 +57,6 @@ def __right_handler(event, row, column):
 
 
 # grid generation
-flag = PhotoImage(file="red_flag.gif")
 
 for i in range(x_size):
     for j in range(y_size):
