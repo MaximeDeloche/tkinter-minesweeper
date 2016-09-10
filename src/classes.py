@@ -15,11 +15,7 @@ class Square:
 
     def left_click(self):
         self.revealed = True
-        if self.is_bomb:
-            print("BOMB")
-        else:
-            print("OK, ", self.number)
-
+        return (self.is_bomb, self.number)
 
 
 class Grid:

@@ -32,14 +32,23 @@ main_frame.pack(padx=10, pady=10)
 
 # click handlings => package ?
 def __left_handler(event, row, column):
-    # (is_bomb, number) = grid.squares[row][column].left_click()
-    print("Ta gueule")
+    if not grid.squares[row][column].revealed:
+        if event.widget["image"] == "":
+            (is_bomb, number) = grid.squares[row][column].left_click()
+            if is_bomb:
+                print("PERDU PUTAIN")
+            else:
+                event.widget["text"] = number
+            event.widget["relief"] = SUNKEN
 
-def right_handler(event):
-    if event.widget["image"] == "":
-        event.widget["image"] = flag
-    else:
-        event.widget["image"] = ""
+def __right_handler(event, row, column):
+    if not grid.squares[row][column].revealed:
+        if event.widget["image"] == "":
+            event.widget["state"] = "normal"
+            event.widget["image"] = flag
+        else:
+            event.widget["state"] = "disabled"
+            event.widget["image"] = ""
 
 
 # grid generation
@@ -53,14 +62,17 @@ for i in range(x_size):
         f.grid_propagate(False)
         f.grid(row=i, column=j)
 
-        b = Button(f, borderwidth=1)
+        b = Button( f, borderwidth=1,
+                    state="disabled",
+                    disabledforeground="#000000")
         b.pack(fill=BOTH, expand=True)
 
         # bind mouse clicks with actions
         def left_handler(event, row=i, column=j):
             return __left_handler(event, row, column)
+        def right_handler(event, row=i, column=j):
+            return __right_handler(event, row, column)
         b.bind("<Button-1>", left_handler)
         b.bind("<Button-3>", right_handler)
 
-print("Jusqu'ici, ça prend 8 à 9 nanosecondes")
 window.mainloop()
