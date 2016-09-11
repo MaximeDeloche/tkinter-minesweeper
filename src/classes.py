@@ -36,6 +36,13 @@ class Grid(tk.Frame):
         # |
         # V x
 
+    def left_handler(event):
+        print("left")
+
+    def right_handler(event):
+        print("right")
+
+
     def fill(self, height, width):
         self.height = height
         self.width = width
@@ -50,10 +57,10 @@ class Grid(tk.Frame):
                                 disabledforeground="#000000")
                 sq.pack(fill=tk.BOTH, expand=True)
                 # bind mouse clicks with actions
-                def left_handler(event, row=i, column=j):
-                    return __left_handler(event, row, column)
-                def right_handler(event, row=i, column=j):
-                    return __right_handler(event, row, column)
+                # def left_handler(event, row=i, column=j):
+                #     return __left_handler(event, row, column)
+                # def right_handler(event, row=i, column=j):
+                #     return __right_handler(event, row, column)
                 sq.bind("<Button-1>", left_handler)
                 sq.bind("<Button-3>", right_handler)
 
