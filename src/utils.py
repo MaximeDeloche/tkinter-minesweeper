@@ -1,7 +1,10 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import tkinter as tk
 
+
+# useful functions
 def neighbours(i, j, height, width):
     l = []
     for (x, y) in [(i-1, j-1), (i-1, j), (i-1, j+1),

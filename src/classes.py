@@ -4,7 +4,10 @@
 import random
 import utils
 import tkinter as tk
-       
+   
+# images
+flag = tk.PhotoImage(file="red_flag.gif")
+mine = tk.PhotoImage(file="mine.gif")
 
 class Square(tk.Button):
     """ A square of the game """
@@ -15,9 +18,37 @@ class Square(tk.Button):
         self.revealed = False
         self.number = 0
 
-    def left_click(self):
-        self.revealed = True
-        return (self.is_bomb, self.number)
+    def left_handler(self, event):
+        if event.widget["image"] == "" and not self.revealed:
+            self.revealed = True
+            event.widget["relief"] = tk.SUNKEN
+            if self.is_bomb:
+                event.widget["state"] = "normal"
+                event.widget["image"] = mine
+                # TODO : end game properly
+                # it means : make the game unresponsive, without closing it
+                # disable frames ?
+            else:
+                event.widget["text"] = self.number
+                if self.number == 0:
+                    print("Need to discover neighbours")
+                    # it has to discover all neighbours
+                    # + same recursively if neighbours are zero
+                    # therefore needs the position of the pressed event
+                    # then access with grid.squares
+                    # CROSS THE FINGERS, IT WILL FUCKIN WORK
+
+
+    def right_handler(self, event):
+        if not self.revealed:
+            if event.widget["image"] == "":
+                event.widget["state"] = "normal"
+                event.widget["image"] = flag
+                print("flag added")
+            else:
+                event.widget["state"] = "disabled"
+                event.widget["image"] = ""
+                print("flag removed")
 
 
 class Grid(tk.Frame):
@@ -36,11 +67,6 @@ class Grid(tk.Frame):
         # |
         # V x
 
-    def left_handler(event):
-        print("left")
-
-    def right_handler(event):
-        print("right")
 
 
     def fill(self, height, width):
@@ -54,15 +80,15 @@ class Grid(tk.Frame):
                 f.grid_propagate(False)
                 f.grid(row=i, column=j)
                 sq = Square(f, borderwidth=1, state="disabled",
-                                disabledforeground="#000000")
+                            disabledforeground="#000000")
                 sq.pack(fill=tk.BOTH, expand=True)
                 # bind mouse clicks with actions
                 # def left_handler(event, row=i, column=j):
                 #     return __left_handler(event, row, column)
                 # def right_handler(event, row=i, column=j):
                 #     return __right_handler(event, row, column)
-                sq.bind("<Button-1>", left_handler)
-                sq.bind("<Button-3>", right_handler)
+                sq.bind("<Button-1>", sq.left_handler)
+                sq.bind("<Button-3>", sq.right_handler)
 
                 row.append(sq)
 
