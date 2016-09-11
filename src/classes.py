@@ -3,9 +3,10 @@
 
 import random
 import utils
+from tkinter import *
        
 
-class Square:
+class Square():
     """ A square of the game """
 
     def __init__(self):
@@ -54,9 +55,8 @@ class Grid:
 
             for (i, j) in pos:
                 self.squares[i][j].is_bomb = True
-                for (x, y) in utils.neighbours(i, j):
-                    if x in range(self.height) and y in range(self.width):
-                        self.squares[x][y].number += 1
+                for (x, y) in utils.neighbours(i, j, self.height, self.width):
+                    self.squares[x][y].number += 1
 
 
 
