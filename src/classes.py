@@ -3,13 +3,14 @@
 
 import random
 import utils
-from tkinter import *
+import tkinter as tk
        
 
-class Square():
+class Square(tk.Button):
     """ A square of the game """
 
-    def __init__(self):
+    def __init__(self, master=None, cnf={}, **args):
+        tk.Button.__init__(self, master, cnf, **args)
         self.is_bomb = False
         self.revealed = False
         self.number = 0
@@ -19,12 +20,13 @@ class Square():
         return (self.is_bomb, self.number)
 
 
-class Grid:
+class Grid(tk.Frame):
     """ A grid of the game, containing Squares """
 
-    def __init__(self, height, width):
-        self.height = height
-        self.width = width
+    def __init__(self, master=None, cnf={}, **args):
+        tk.Frame.__init__(self, master, cnf, **args)
+        self.height = 0
+        self.width = 0
         self.bombs = 0
         self.squares = list()
 
@@ -33,12 +35,32 @@ class Grid:
         # |       y
         # |
         # V x
+
+    def fill(self, height, width):
+        self.height = height
+        self.width = width
         for i in range(height):
-            tmp = list()
+            row = list()
             for j in range(width):
-                sq = Square()
-                tmp.append(sq)
-            self.squares.append(tmp)
+                f = tk.Frame(self, height=25, width=25)
+                f.pack_propagate(False)
+                f.grid_propagate(False)
+                f.grid(row=i, column=j)
+                sq = Square(f, borderwidth=1, state="disabled",
+                                disabledforeground="#000000")
+                sq.pack(fill=tk.BOTH, expand=True)
+                # bind mouse clicks with actions
+                def left_handler(event, row=i, column=j):
+                    return __left_handler(event, row, column)
+                def right_handler(event, row=i, column=j):
+                    return __right_handler(event, row, column)
+                sq.bind("<Button-1>", left_handler)
+                sq.bind("<Button-3>", right_handler)
+
+                row.append(sq)
+
+            self.squares.append(row)
+
 
 
 
