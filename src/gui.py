@@ -4,8 +4,8 @@
 import tkinter as tk
 
 # game init (need parameters)
-x_size = 20
-y_size = 30
+x_size = 10
+y_size = 15
 bombs = 20
 
 # main unresizable window

@@ -18,7 +18,7 @@ class Square(tk.Button):
         self.revealed = False
         self.number = 0
 
-    def left_handler(self, event):
+    def __left_handler(self, event, row, column, height, width):
         if event.widget["image"] == "" and not self.revealed:
             self.revealed = True
             event.widget["relief"] = tk.SUNKEN
@@ -27,11 +27,13 @@ class Square(tk.Button):
                 event.widget["image"] = mine
                 # TODO : end game properly
                 # it means : make the game unresponsive, without closing it
-                # disable frames ?
+                # disable frames ? Unbind_all ?
             else:
                 event.widget["text"] = self.number
                 if self.number == 0:
                     print("Need to discover neighbours")
+                    # for (x, y) in utils.neighbours(row, column, height, width):
+                        # if not 
                     # it has to discover all neighbours
                     # + same recursively if neighbours are zero
                     # therefore needs the position of the pressed event
@@ -83,11 +85,11 @@ class Grid(tk.Frame):
                             disabledforeground="#000000")
                 sq.pack(fill=tk.BOTH, expand=True)
                 # bind mouse clicks with actions
-                # def left_handler(event, row=i, column=j):
-                #     return __left_handler(event, row, column)
+                def left_handler(event, row=i, column=j, h=height, w=width):
+                    return sq.__left_handler(event, row, column, h, w)
                 # def right_handler(event, row=i, column=j):
                 #     return __right_handler(event, row, column)
-                sq.bind("<Button-1>", sq.left_handler)
+                sq.bind("<Button-1>", left_handler)
                 sq.bind("<Button-3>", sq.right_handler)
 
                 row.append(sq)
