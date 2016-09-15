@@ -1,8 +1,6 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import tkinter as tk
-
 
 # useful functions
 def neighbours(i, j, height, width):

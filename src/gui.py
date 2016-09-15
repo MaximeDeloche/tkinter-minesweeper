@@ -31,13 +31,16 @@ window.config(menu=menubar)
 top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
 top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
 
+
+current_bombs = bombs # TODO
+bombs_counter = tk.Label(top_frame, bg="#fff", text=current_bombs)
+bombs_counter.pack(padx = 3, pady = 3, side=tk.LEFT, fill="x")
+
 # frame in which the buttons will be displayed
 game_grid = cls.Grid(window, borderwidth=2, relief=tk.SUNKEN)
 game_grid.fill(x_size, y_size)
 game_grid.add_bombs(bombs)
 game_grid.pack(padx=10, pady=10, side=tk.BOTTOM)
 
-
-print(game_grid)
 
 window.mainloop()

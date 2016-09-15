@@ -18,39 +18,20 @@ class Square(tk.Button):
         self.revealed = False
         self.number = 0
 
-    def __left_handler(self, event, row, column, height, width):
-        if event.widget["image"] == "" and not self.revealed:
-            self.revealed = True
-            event.widget["relief"] = tk.SUNKEN
-            if self.is_bomb:
-                event.widget["state"] = "normal"
-                event.widget["image"] = mine
-                # TODO : end game properly
-                # it means : make the game unresponsive, without closing it
-                # disable frames ? Unbind_all ?
-            else:
-                event.widget["text"] = self.number
-                if self.number == 0:
-                    print("Need to discover neighbours")
-                    # for (x, y) in utils.neighbours(row, column, height, width):
-                        # if not 
-                    # it has to discover all neighbours
-                    # + same recursively if neighbours are zero
-                    # therefore needs the position of the pressed event
-                    # then access with grid.squares
-                    # CROSS THE FINGERS, IT WILL FUCKIN WORK
 
-
-    def right_handler(self, event):
-        if not self.revealed:
-            if event.widget["image"] == "":
-                event.widget["state"] = "normal"
-                event.widget["image"] = flag
-                print("flag added")
-            else:
-                event.widget["state"] = "disabled"
-                event.widget["image"] = ""
-                print("flag removed")
+    def reveal(self):
+        self.revealed = True
+        self["relief"] = tk.SUNKEN
+        if self.is_bomb:
+            self["state"] = "normal"
+            self["image"] = mine
+            # TODO : end game properly
+            # it means : make the game unresponsive, without closing it
+            # disable frames ? Unbind_all ? Raise error ?
+        else:
+            if self.number != 0:
+                self["text"] = self.number
+            
 
 
 class Grid(tk.Frame):
@@ -69,6 +50,23 @@ class Grid(tk.Frame):
         # |
         # V x
 
+    def __left_handler(self, event, i, j):
+        if self.squares[i][j]["image"] =="" and not self.squares[i][j].revealed:
+            self.squares[i][j].reveal()
+            if self.squares[i][j].number == 0:
+                for (x, y) in utils.neighbours(i, j, self.height, self.width):
+                    self.__left_handler(event, x, y)
+                            
+
+    def __right_handler(self, event):
+        if not event.widget.revealed:
+            if event.widget["image"] == "":
+                event.widget["state"] = "normal"
+                event.widget["image"] = flag
+            else:
+                event.widget["state"] = "disabled"
+                event.widget["image"] = ""
+
 
 
     def fill(self, height, width):
@@ -85,12 +83,10 @@ class Grid(tk.Frame):
                             disabledforeground="#000000")
                 sq.pack(fill=tk.BOTH, expand=True)
                 # bind mouse clicks with actions
-                def left_handler(event, row=i, column=j, h=height, w=width):
-                    return sq.__left_handler(event, row, column, h, w)
-                # def right_handler(event, row=i, column=j):
-                #     return __right_handler(event, row, column)
+                def left_handler(event, row=i, column=j):
+                    return self.__left_handler(event, row, column)
                 sq.bind("<Button-1>", left_handler)
-                sq.bind("<Button-3>", sq.right_handler)
+                sq.bind("<Button-3>", self.__right_handler)
 
                 row.append(sq)
 
