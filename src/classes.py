@@ -9,12 +9,19 @@ import tkinter as tk
 flag = tk.PhotoImage(file="red_flag.gif")
 mine = tk.PhotoImage(file="mine.gif")
 
+# class TopFrame(tvk.Frame):
+#     """ The top frame displaying the number of bombs left and the time """
+#     def __init__
+
+
+
 class Square(tk.Button):
     """ A square of the game """
 
     def __init__(self, master=None, cnf={}, **args):
         tk.Button.__init__(self, master, cnf, **args)
         self.is_bomb = False
+        self.marked_as_bomb = False
         self.revealed = False
         self.number = 0
 
@@ -42,6 +49,7 @@ class Grid(tk.Frame):
         self.height = 0
         self.width = 0
         self.bombs = 0
+        self.bombs_left = 0
         self.squares = list()
 
         # create a list of list of Squares
@@ -63,9 +71,15 @@ class Grid(tk.Frame):
             if event.widget["image"] == "":
                 event.widget["state"] = "normal"
                 event.widget["image"] = flag
+                event.widget.marked_as_bomb = True
+                self.bombs_left -= 1
+                print("Bombs left = ", self.bombs_left)
             else:
                 event.widget["state"] = "disabled"
                 event.widget["image"] = ""
+                event.widget.marked_as_bomb = False
+                self.bombs_left += 1
+                print("Bombs left = ", self.bombs_left)
 
 
 
@@ -100,6 +114,7 @@ class Grid(tk.Frame):
             raise Exception("Invalid number of bombs.")
         else:
             self.bombs = bombs
+            self.bombs_left = bombs
             # sample makes random choices with distinct elements
             # we don't want several bombs on the same square
             pos = random.sample([(x, y) 
