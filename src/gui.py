@@ -57,30 +57,5 @@ utils.add_bombs(squares, BOMBS, HEIGHT, WIDTH)
 game_frame.pack(padx=10, pady=10, side=tk.BOTTOM)
 
 
-# Event handlers ###############################################################
-# def __left_handler(self, event, i, j):
-#     if self.squares[i][j]["image"] =="" and not self.squares[i][j].revealed:
-#         self.squares[i][j].reveal()
-#         if self.squares[i][j].number == 0:
-#             for (x, y) in utils.neighbours(i, j, self.height, self.width):
-#                 self.__left_handler(event, x, y)
-#                         
-#
-# def __right_handler(self, event):
-#     if not event.widget.revealed:
-#         if event.widget["image"] == "":
-#             event.widget["state"] = "normal"
-#             event.widget["image"] = flag
-#             event.widget.marked_as_bomb = True
-#             self.bombs_left -= 1
-#         else:
-#             event.widget["state"] = "disabled"
-#             event.widget["image"] = ""
-#             event.widget.marked_as_bomb = False
-#             self.bombs_left += 1
-#         print("Bombs left = ", self.bombs_left)
-
-
-
 
 window.mainloop()
