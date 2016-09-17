@@ -23,7 +23,7 @@ class Square(tk.Frame):
         self.button.pack(fill=tk.BOTH, expand=True)
 
         def __handler(event, x=self.x, y=self.y):
-            return utils.handler_test(x, y)
+            return utils.handler(event, x, y)
 
         # left button binding
         self.button.bind("<Button-1>", __handler)

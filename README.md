@@ -37,3 +37,7 @@ TODO
 - add parameters for size / number of bombs
 - cf incator of difficulty 3BV
 
+
+Still a bug in dependencies !
+main need classes to generate a grid of squares
+classes need to call an event handler, which have to access the grid of squares
