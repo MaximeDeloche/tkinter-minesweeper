@@ -18,7 +18,6 @@ window.resizable(width=False, height=False)
 import classes as cls
 import utils
 
-
 # menu
 menubar = tk.Menu(window)
 menu1 = tk.Menu(menubar, tearoff=0)
