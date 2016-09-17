@@ -10,7 +10,7 @@ import utils
 # Global variables #############################################################
 HEIGHT = 10
 WIDTH = 15
-BOMBS = 20
+BOMBS = 40
 BOMBS_LEFT = BOMBS
 
 
@@ -23,6 +23,7 @@ window.resizable(width=False, height=False)
 # Images #######################################################################
 FLAG = tk.PhotoImage(file="red_flag.gif")
 MINE = tk.PhotoImage(file="mine.gif")
+
 
 # Game menu (will probably require a package) ##################################
 menubar = tk.Menu(window)
@@ -45,14 +46,14 @@ top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
 game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
 
 def create_square(i, j):
-    s = cls.Square(game_frame, height=25, width=25)
+    s = cls.Square(i, j, game_frame, height=25, width=25)
     s.pack_propagate(False) # still useful ?
     s.grid_propagate(False) # still useful ?
     s.grid(row=i, column=j)
     return s
 
 squares = [[create_square(i, j) for i in range(HEIGHT)] for j in range(WIDTH)]
-# game_frame.add_bombs(bombs)
+utils.add_bombs(squares, BOMBS, HEIGHT, WIDTH)
 game_frame.pack(padx=10, pady=10, side=tk.BOTTOM)
 
 

@@ -1,34 +1,39 @@
 Minesweeper Game - Python3
+==========================
 
-Structure :
+Widgets Structure
+-----------------
 
-- window
+- root window
 	- menu
 	- top frame
 		- bombs counter
 		- timer
 	- game frame
-		- squares of the game
+		- squares of the game (= frame)
+			- button
 
 
-
-TODO yet :
-- end game properly (win and loose)
-- count and print numbers of bombs
-- add parameters for size / number of bombs
-
-Right click :
+Handling events procedure
+-------------------------
+- Click on a button => calls left or right handler with his pos
+Handler executes actions depending on the button's/state and the click :
+- Right click :
 	- add/remove flag
 	- increase/decrease number of bombs
-Left click :
+- Left click :
 	- discover
 	- if bomb, loose
-	- elif 0, discover neighbours
+	- else if 0, discover neighbours
 	
 
 
+TODO
+----
 
-
-- indice de mesure de difficulté : 3BV
-
+- package for global variables ? Would save parameters
+- end game properly (win and loose)
+- count and print numbers of bombs
+- add parameters for size / number of bombs
+- cf incator of difficulty 3BV
 
