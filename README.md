@@ -1,12 +1,30 @@
-Jeu du démineur - Python3
+Minesweeper Game - Python3
 
-DONE !
+Structure :
+
+- window
+	- menu
+	- top frame
+		- bombs counter
+		- timer
+	- game frame
+		- squares of the game
+
+
+
 TODO yet :
 - end game properly (win and loose)
-- count and print numbers of bombs : problem because I don't where to declare my counting variable in order to have it updated when I modify it (probably need a TopFrame class)
+- count and print numbers of bombs
 - add parameters for size / number of bombs
 
-
+Right click :
+	- add/remove flag
+	- increase/decrease number of bombs
+Left click :
+	- discover
+	- if bomb, loose
+	- elif 0, discover neighbours
+	
 
 
 
