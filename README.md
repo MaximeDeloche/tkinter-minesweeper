@@ -39,6 +39,7 @@ TODO
 
 
 Still a bug in dependencies !
+<<<<<<< HEAD
 -----------------------------
 - main need classes to generate a grid of squares
 - classes need to call an event handler, which have to access the grid of squares
@@ -52,3 +53,7 @@ In MVC model :
 - *Controller* = utils.py
 	- handle user input
 
+=======
+main need classes to generate a grid of squares
+classes need to call an event handler, which have to access the grid of squares
+>>>>>>> bf4b0148c1cadcd0694b44f2636f8804df24c2a0
