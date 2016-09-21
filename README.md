@@ -31,22 +31,14 @@ Handler executes actions depending on the button's/state and the click :
 TODO
 ----
 
-- package for global variables ? Would save parameters
 - end game properly (win and loose)
 - count and print numbers of bombs
 - add parameters for size / number of bombs
-- cf incator of difficulty 3BV
+- cf indicator of difficulty 3BV
 
-
-Still a bug in dependencies !
-- main need classes to generate a grid of squares
-- classes need to call an event handler, which have to access the grid of squares
 
 In MVC model :
 --------------
-- *Model* = classes.py and gui.py
-	- functions and data of the project
-- *View* = gui.py 
-	- display model to the user
-- *Controller* = utils.py
-	- handle user input
+- *Model* = functions and data of the project
+- *View* = display model to the user
+- *Controller* = handle user input
