@@ -15,7 +15,7 @@ def neighbours(i, j, height_max, width_max):
     return l
 
 
-def add_bombs(squares, bombs, w, h):
+def add_bombs(board, bombs, w, h):
     if bombs <= 0 or bombs >= w * h:
         raise Exception("Invalid number of bombs.")
     else:
@@ -24,22 +24,16 @@ def add_bombs(squares, bombs, w, h):
         pos = rd.sample([(x, y) for x in range(h) for y in range (w)], bombs)
 
         for (i, j) in pos:
-            squares[i][j].is_bomb = True
+            board[i][j].is_bomb = True
             for (x, y) in neighbours(i, j, h, w):
-                squares[x][y].bombs_around += 1
+                board[x][y].bombs_around += 1
 
 
 # Event handlers ###############################################################
-def handler(event, x, y):
-    if event.num == 1:
-        left_handler(x, y)
-    elif event.num == 3:
-        right_handler(x, y)
-    else:
-        raise Exception('Invalid event code.')
 
-
-def left_handler(i, j):
+def left_handler(board, grid, i, j):
+    print("Left")
+    return
     if squares[i][j]["image"] =="" and not self.squares[i][j].revealed:
         squares[i][j].reveal()
         if self.squares[i][j].number == 0:
@@ -47,7 +41,9 @@ def left_handler(i, j):
                 self.__left_handler(event, x, y)
 
 
-def __right_handler(self, event):
+def right_handler(board, grid, i, j):
+    print("Right")
+    return
     if not event.widget.revealed:
         if event.widget["image"] == "":
             event.widget["state"] = "normal"

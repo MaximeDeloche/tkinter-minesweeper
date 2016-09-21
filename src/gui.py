@@ -38,24 +38,38 @@ window.config(menu=menubar)
 top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
 top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
 
-# bombs_counter = tk.Label(top_frame, bg="#fff", text=game_grid.bombs_left)
-# bombs_counter.pack(padx = 3, pady = 3, side=tk.LEFT, fill="x")
 
 
 # Game frame ###################################################################
 game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
 
+BOARD = [[cls.Square(i, j) for i in range(HEIGHT)] for j in range(WIDTH)]
+
 def create_square(i, j):
-    s = cls.Square(i, j, game_frame, height=25, width=25)
-    s.pack_propagate(False) # still useful ?
-    s.grid_propagate(False) # still useful ?
-    s.grid(row=i, column=j)
+    f = tk.Frame(game_frame, height=25, width=25)
+    s = tk.Button(f, borderwidth=1, state="normal",disabledforeground="#000000")
+    s.pack(fill=tk.BOTH, expand=True)
+    
+    # buttons bindings
+    def __handler(event, x=i, y=j):
+        if event.num == 1:
+            print("Left click on (", x, ", ", y, ")", sep="")
+            utils.left_handler(BOARD, GRID, x, y)
+        elif event.num == 3:
+            print("Right click on (", x, ", ", y, ")", sep="")
+            utils.right_handler(BOARD, GRID, x, y)
+        else:
+            raise Exception('Invalid event code.')
+    s.bind("<Button-1>", __handler)
+    s.bind("<Button-3>", __handler)
+
+    f.pack_propagate(False) # still useful ?
+    f.grid_propagate(False) # still useful ?
+    f.grid(row=i, column=j)
     return s
 
-squares = [[create_square(i, j) for i in range(HEIGHT)] for j in range(WIDTH)]
-utils.add_bombs(squares, BOMBS, HEIGHT, WIDTH)
+GRID = [[create_square(i, j) for i in range(HEIGHT)] for j in range(WIDTH)]
+utils.add_bombs(BOARD, BOMBS, HEIGHT, WIDTH)
 game_frame.pack(padx=10, pady=10, side=tk.BOTTOM)
-
-
 
 window.mainloop()
