@@ -23,7 +23,8 @@ def add_bombs(board):
     else:
         # sample makes random choices with distinct elements
         # we don't want several bombs on the same square
-        pos = rd.sample([(x, y) for x in range(HEIGHT) for y in range (WIDTH)], BOMBS)
+        pos = rd.sample([(x, y) for x in range(HEIGHT) 
+                                for y in range (WIDTH)], BOMBS)
 
         for (i, j) in pos:
             board[i][j].is_bomb = True
@@ -41,9 +42,7 @@ def left_handler(board, grid, i, j, mine):
         if board[i][j].is_bomb:
             grid[i][j]["image"] = mine
             grid[i][j]["state"] = "normal"
-            # for i in range(HEIGHT):
-            #     for j in range(WIDTH):
-            #         grid[i][j]["state"] = tk.DISABLED
+            unbind_all_buttons(grid)
         elif board[i][j].bombs_around != 0:
             grid[i][j]["text"] = board[i][j].bombs_around
         else:
@@ -62,6 +61,12 @@ def right_handler(board, grid, i, j, flag):
 
 
 
+def unbind_all_buttons(grid):
+    for i in range(HEIGHT):
+        for j in range(WIDTH):
+            grid[i][j]["state"] = "disabled"
+            grid[i][j].unbind("<Button-1>")
+            grid[i][j].unbind("<Button-3>")
 
 
 def print_board(board):
