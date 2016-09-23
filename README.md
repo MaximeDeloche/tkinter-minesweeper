@@ -32,7 +32,6 @@ TODO
 ----
 
 - end game properly (win and loose)
-- count and print numbers of bombs
 - add parameters for size / number of bombs
 - cf indicator of difficulty 3BV
 

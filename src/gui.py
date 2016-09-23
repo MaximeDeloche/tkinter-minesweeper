@@ -6,7 +6,7 @@ import tkinter as tk
 import classes as cls
 import utils
 
-from global_vars import *
+import global_vars as g
 
 
 # Main unresizable window ######################################################
@@ -33,12 +33,18 @@ window.config(menu=menubar)
 top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
 top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
 
+v = tk.StringVar()
+v.set(g.BOMBS_LEFT)
+bombs_counter = tk.Label(top_frame, height=1, bg='white', textvariable=v)
+bombs_counter.pack(padx=5, pady=5, side=tk.LEFT)
+
 
 
 # Game frame ###################################################################
 game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
 
-BOARD = [[cls.Square(i, j) for j in range(WIDTH)] for i in range(HEIGHT)]
+BOARD = [[cls.Square(i, j)  for j in range(g.WIDTH)] 
+                            for i in range(g.HEIGHT)]
 
 def create_square(i, j):
     f = tk.Frame(game_frame, height=25, width=25)
@@ -51,6 +57,7 @@ def create_square(i, j):
             utils.left_handler(BOARD, GRID, x, y, MINE)
         elif event.num == 3:
             utils.right_handler(BOARD, GRID, x, y, FLAG)
+            v.set(g.BOMBS_LEFT)
         else:
             raise Exception('Invalid event code.')
     s.bind("<Button-1>", __handler)
@@ -61,7 +68,7 @@ def create_square(i, j):
     f.grid(row=i, column=j)
     return s
 
-GRID = [[create_square(i, j) for j in range(WIDTH)] for i in range(HEIGHT)]
+GRID = [[create_square(i, j) for j in range(g.WIDTH)] for i in range(g.HEIGHT)]
 utils.add_bombs(BOARD)
 game_frame.pack(padx=10, pady=10, side=tk.BOTTOM)
 

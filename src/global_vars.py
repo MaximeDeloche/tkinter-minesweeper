@@ -1,9 +1,9 @@
 import tkinter as tk
 
 # Global variables #############################################################
-HEIGHT = 10
-WIDTH = 15
-BOMBS = 40
+HEIGHT = 20
+WIDTH = 30
+BOMBS = 50
 BOMBS_LEFT = BOMBS
 
 

@@ -3,8 +3,9 @@
 
 import classes as cls
 import random as rd
+import tkinter as tk
 
-from global_vars import *
+import global_vars as g
 
 
 def neighbours(i, j):
@@ -12,19 +13,19 @@ def neighbours(i, j):
     for (x, y) in [ (i-1, j-1), (i-1, j), (i-1, j+1),
                     (i, j-1), (i, j+1),
                     (i+1, j-1), (i+1, j), (i+1, j+1)]:
-        if x in range(HEIGHT) and y in range(WIDTH):
+        if x in range(g.HEIGHT) and y in range(g.WIDTH):
             l.append((x, y))
     return l
 
 
 def add_bombs(board):
-    if BOMBS <= 0 or BOMBS >= WIDTH*HEIGHT:
-        raise Exception("Invalid number of bombs.")
+    if g.BOMBS <= 0 or g.BOMBS >= g.WIDTH*g.HEIGHT:
+        raise Exception("Invalid number of g.BOMBS.")
     else:
         # sample makes random choices with distinct elements
-        # we don't want several bombs on the same square
-        pos = rd.sample([(x, y) for x in range(HEIGHT) 
-                                for y in range (WIDTH)], BOMBS)
+        # we don't want several g.BOMBS on the same square
+        pos = rd.sample([(x, y) for x in range(g.HEIGHT) 
+                                for y in range (g.WIDTH)], g.BOMBS)
 
         for (i, j) in pos:
             board[i][j].is_bomb = True
@@ -55,15 +56,17 @@ def right_handler(board, grid, i, j, flag):
         if grid[i][j]["image"] == "":
             grid[i][j]["image"] = flag
             grid[i][j]["state"] = "normal"
+            g.BOMBS_LEFT -= 1
         else:
             grid[i][j]["state"] = "disabled"
             grid[i][j]["image"] = ""
+            g.BOMBS_LEFT += 1
 
 
 
 def unbind_all_buttons(grid):
-    for i in range(HEIGHT):
-        for j in range(WIDTH):
+    for i in range(g.HEIGHT):
+        for j in range(g.WIDTH):
             grid[i][j]["state"] = "disabled"
             grid[i][j].unbind("<Button-1>")
             grid[i][j].unbind("<Button-3>")
