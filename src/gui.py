@@ -5,6 +5,7 @@
 import tkinter as tk
 import classes as cls
 import utils
+import time
 
 import global_vars as g
 
@@ -33,10 +34,22 @@ window.config(menu=menubar)
 top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
 top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
 
-v = tk.StringVar()
-v.set(g.BOMBS_LEFT)
-bombs_counter = tk.Label(top_frame, height=1, bg='white', textvariable=v)
+# bombs_counter
+bombs_counter_str = tk.StringVar()
+bombs_counter_str.set(g.BOMBS_LEFT)
+bombs_counter = tk.Label(   top_frame, height=1, bg='white', 
+                            textvariable=bombs_counter_str)
 bombs_counter.pack(padx=5, pady=5, side=tk.LEFT)
+
+# time counter
+time_counter_str = tk.StringVar()
+time_counter = tk.Label(top_frame, height=1, bg='white',
+                        textvariable=time_counter_str)
+time_counter.pack(padx=5, pady=5, side = tk.RIGHT)
+
+def update_time():
+    time_counter_str.set(int((time.time()-init_time)//1))
+    time_counter.after(100, update_time)
 
 
 
@@ -57,7 +70,7 @@ def create_square(i, j):
             utils.left_handler(BOARD, GRID, x, y, MINE)
         elif event.num == 3:
             utils.right_handler(BOARD, GRID, x, y, FLAG)
-            v.set(g.BOMBS_LEFT)
+            bombs_counter_str.set(g.BOMBS_LEFT)
         else:
             raise Exception('Invalid event code.')
     s.bind("<Button-1>", __handler)
@@ -74,4 +87,6 @@ game_frame.pack(padx=10, pady=10, side=tk.BOTTOM)
 
 utils.print_board(BOARD)
 
+init_time = time.time()
+update_time()
 window.mainloop()
