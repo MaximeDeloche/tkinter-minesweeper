@@ -37,6 +37,7 @@ def add_bombs(board):
 
 def unbind_all_buttons(grid):
     """ Make all squares unresponsive to click """
+    # TODO improvable
     for i in range(g.HEIGHT):
         for j in range(g.WIDTH):
             grid[i][j]["state"] = "disabled"
@@ -62,6 +63,17 @@ def disp_help():
     return
     # TODO
     # display a doc page on how to play
+
+def reset_game(board, grid):
+    for x in range(g.HEIGHT):
+        for y in range(g.WIDTH):
+            board[x][y].reset()
+            grid[x][y]["image"] = ""
+            grid[x][y]["text"] = ""
+            grid[x][y]["state"] = "normal"
+            grid[x][y]["relief"] = tk.RAISED
+    add_bombs(board)
+
 
 
 def print_board(board):

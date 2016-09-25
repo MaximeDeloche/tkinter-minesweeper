@@ -77,18 +77,11 @@ bombs_counter = tk.Label(   top_frame, height=1, width=4, bg='white',
 bombs_counter.grid(row=0, column=0, padx=5, sticky=tk.W)
 
 # new game button, middle left
-def reset_game():
-    global game_frame
-    global init_time
-    game_frame.destroy()
-    game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
-    g.BOMBS_LEFT = g.BOMBS
-    bombs_counter_str.set(g.BOMBS_LEFT)
-    init_time = time.time()
-    new_game()
+def _reset_game():
+    utils.reset_game(BOARD, GRID)
 
 newgame_button = tk.Button( top_frame, bd=1, text="New game",
-                            command=reset_game)
+                            command=_reset_game)
 newgame_button.grid(row=0, column=1, padx=0, sticky=tk.E)
 
 # options button, middle

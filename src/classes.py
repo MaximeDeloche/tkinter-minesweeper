@@ -14,6 +14,11 @@ class Square():
         self.revealed = False
         self.bombs_around = 0
 
+    def reset(self):
+        self.is_bomb = False
+        self.revealed = False
+        self.bombs_around = 0
+
 
 
         # -------->
