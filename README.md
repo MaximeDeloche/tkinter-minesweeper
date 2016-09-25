@@ -5,9 +5,11 @@ Widgets Structure
 -----------------
 
 - root window
-	- menu
 	- top frame
 		- bombs counter
+		- new game button
+		- options button
+		- help button
 		- timer
 	- game frame
 		- squares of the game (= frame)
@@ -34,8 +36,6 @@ TODO
 - end game properly (win and loose)
 - add parameters for size / number of bombs
 - cf indicator of difficulty 3BV
-
-cf doc. p 51 and 52
 
 In MVC model :
 --------------

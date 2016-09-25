@@ -87,8 +87,8 @@ def create_square(i, j):
     s.bind("<Button-1>", __handler)
     s.bind("<Button-3>", __handler)
 
-    f.pack_propagate(False) # still useful ?
-    f.grid_propagate(False) # still useful ?
+    f.pack_propagate(False)
+    # f.grid_propagate(False) # still useful ?
     f.grid(row=i, column=j)
     return s
 

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import tkinter as tk
+import global_vars as g
 import utils
 
 # Event handlers ###############################################################
