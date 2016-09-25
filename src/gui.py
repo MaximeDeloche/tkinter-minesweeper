@@ -78,7 +78,12 @@ bombs_counter.grid(row=0, column=0, padx=5, sticky=tk.W)
 
 # new game button, middle left
 def _reset_game():
+    global init_time
     utils.reset_game(BOARD, GRID)
+    g.BOMBS_LEFT = g.BOMBS
+    bombs_counter_str.set(g.BOMBS_LEFT)
+    init_time = time.time()
+
 
 newgame_button = tk.Button( top_frame, bd=1, text="New game",
                             command=_reset_game)
