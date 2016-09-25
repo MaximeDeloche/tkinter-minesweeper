@@ -10,18 +10,22 @@ import utils
 def left_handler(board, grid, i, j, mine):
     """ Called when left click on the (i, j) cell """
     if grid[i][j]["image"] == "" and not board[i][j].revealed:
-        board[i][j].revealed = True
         grid[i][j]["state"] = "disabled"
         grid[i][j]["relief"] = tk.SUNKEN
         if board[i][j].is_bomb:
             grid[i][j]["image"] = mine
             grid[i][j]["state"] = "normal"
-            utils.unbind_all_buttons(grid)
-        elif board[i][j].bombs_around != 0:
-            grid[i][j]["text"] = board[i][j].bombs_around
+            utils.end_game(False, grid)
         else:
-            for (x, y) in utils.neighbours(i, j):
-                left_handler(board, grid, x, y, mine)
+            board[i][j].revealed = True
+            g.SQUARES_REVEALED += 1
+            if board[i][j].bombs_around != 0:
+                grid[i][j]["text"] = board[i][j].bombs_around
+            else:
+                for (x, y) in utils.neighbours(i, j):
+                    left_handler(board, grid, x, y, mine)
+            if g.SQUARES_REVEALED == (g.WIDTH * g.HEIGHT - g.BOMBS):
+                utils.end_game(True, grid)
 
 
 def right_handler(board, grid, i, j, flag):
@@ -35,6 +39,4 @@ def right_handler(board, grid, i, j, flag):
             grid[i][j]["state"] = "disabled"
             grid[i][j]["image"] = ""
             g.BOMBS_LEFT += 1
-
-
 

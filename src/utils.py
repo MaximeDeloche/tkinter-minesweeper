@@ -1,11 +1,13 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import classes as cls
+import sys
 import random as rd
 import tkinter as tk
+import tkinter.messagebox as tkmsg
 
 import global_vars as g
+import classes as cls
 
 
 def neighbours(i, j):
@@ -35,22 +37,15 @@ def add_bombs(board):
                 board[x][y].bombs_around += 1
 
 
-def unbind_all_buttons(grid):
-    """ Make all squares unresponsive to click """
-    # TODO improvable
-    for i in range(g.HEIGHT):
-        for j in range(g.WIDTH):
-            grid[i][j]["state"] = "disabled"
-            grid[i][j].unbind("<Button-1>")
-            grid[i][j].unbind("<Button-3>")
-
-
-def new_game():
-    """ Called when click on New game """
-    return
-    # TODO
-    # need to generate new board, new grid, reset counters...
-    # change global variables and start gui program again ?
+# def unbind_all_buttons(grid):
+#     """ Make all squares unresponsive to click """
+#     # TODO improvable
+#     for i in range(g.HEIGHT):
+#         for j in range(g.WIDTH):
+#             grid[i][j]["state"] = "disabled"
+#             grid[i][j].unbind("<Button-1>")
+#             grid[i][j].unbind("<Button-3>")
+#
 
 def options():
     """ Called when click on Options """
@@ -73,6 +68,25 @@ def reset_game(board, grid):
             grid[x][y]["state"] = "normal"
             grid[x][y]["relief"] = tk.RAISED
     add_bombs(board)
+    print("\n")
+    print_board(board)
+
+
+def end_game(win, grid):
+    if win:
+        ans = tkmsg.askyesno("You won !", "Your name $username and your \
+        time $time are registered. High scores : $high_scores. \
+        \n\n Play again ?")
+    else:
+        ans = tkmsg.askyesno("You lost...", "High scores : $high_scores. \
+        \n\n Play again ?")
+
+    if ans:
+        return
+        # TODO : start game again => no idea how to do it
+    else:
+        sys.exit()
+
 
 
 

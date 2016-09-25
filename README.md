@@ -8,12 +8,14 @@ Widgets Structure
 	- top frame
 		- bombs counter
 		- new game button
-		- options button
-		- help button
+		- options button => options window
+		- help button => help window
 		- timer
 	- game frame
 		- squares of the game (= frame)
 			- button
+- options window
+- help window
 
 
 Handling events procedure
@@ -34,6 +36,8 @@ TODO
 ----
 
 - end game properly (win and loose)
+	if loose : easy
+	if win : test = if #(revealed) = Width*Height - Bombs
 - add parameters for size / number of bombs
 - cf indicator of difficulty 3BV
 
