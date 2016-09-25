@@ -9,6 +9,7 @@ import global_vars as g
 
 
 def neighbours(i, j):
+    """ Return the list of coordinates of the neighbours of the (i, j) cell"""
     l = []
     for (x, y) in [ (i-1, j-1), (i-1, j), (i-1, j+1),
                     (i, j-1), (i, j+1),
@@ -19,6 +20,7 @@ def neighbours(i, j):
 
 
 def add_bombs(board):
+    """ Fill board squares with bombs """
     if g.BOMBS <= 0 or g.BOMBS >= g.WIDTH*g.HEIGHT:
         raise Exception("Invalid number of g.BOMBS.")
     else:
@@ -33,38 +35,8 @@ def add_bombs(board):
                 board[x][y].bombs_around += 1
 
 
-# Event handlers ###############################################################
-
-def left_handler(board, grid, i, j, mine):
-    if grid[i][j]["image"] == "" and not board[i][j].revealed:
-        board[i][j].revealed = True
-        grid[i][j]["state"] = "disabled"
-        grid[i][j]["relief"] = tk.SUNKEN
-        if board[i][j].is_bomb:
-            grid[i][j]["image"] = mine
-            grid[i][j]["state"] = "normal"
-            unbind_all_buttons(grid)
-        elif board[i][j].bombs_around != 0:
-            grid[i][j]["text"] = board[i][j].bombs_around
-        else:
-            for (x, y) in neighbours(i, j):
-                left_handler(board, grid, x, y, mine)
-
-
-def right_handler(board, grid, i, j, flag):
-    if not board[i][j].revealed:
-        if grid[i][j]["image"] == "":
-            grid[i][j]["image"] = flag
-            grid[i][j]["state"] = "normal"
-            g.BOMBS_LEFT -= 1
-        else:
-            grid[i][j]["state"] = "disabled"
-            grid[i][j]["image"] = ""
-            g.BOMBS_LEFT += 1
-
-
-
 def unbind_all_buttons(grid):
+    """ Make all squares unresponsive to click """
     for i in range(g.HEIGHT):
         for j in range(g.WIDTH):
             grid[i][j]["state"] = "disabled"
@@ -72,7 +44,28 @@ def unbind_all_buttons(grid):
             grid[i][j].unbind("<Button-3>")
 
 
+def new_game():
+    """ Called when click on New game """
+    return
+    # TODO
+    # need to generate new board, new grid, reset counters...
+    # change global variables and start gui program again ?
+
+def options():
+    """ Called when click on Options """
+    return
+    # TODO
+    # set global variables for the next game, applied when new_game()
+
+def disp_help():
+    """ Called when click on Help """
+    return
+    # TODO
+    # display a doc page on how to play
+
+
 def print_board(board):
+    """ Print the board in the shell (used for debugging) """
     for line in board:
         for elt in line:
             if elt.is_bomb:
