@@ -3,6 +3,7 @@
 
 # Imports ######################################################################
 import tkinter as tk
+import tkinter.font as tkf
 import classes as cls
 import utils
 import time
@@ -21,31 +22,38 @@ FLAG = tk.PhotoImage(file="red_flag.gif")
 MINE = tk.PhotoImage(file="mine.gif")
 
 
-# Game menu (will probably require a package) ##################################
-menubar = tk.Menu(window)
-menu1 = tk.Menu(menubar, tearoff=0)
-menu2 = tk.Menu(menubar, tearoff=0)
-menubar.add_cascade(label="Fichier", menu=menu1)
-menubar.add_cascade(label="Aide", menu=menu2)
-window.config(menu=menubar)
-
-
 # Top frame ####################################################################
 top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
 top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
+for i in range(4):
+    top_frame.columnconfigure(i, weight=1)
 
-# bombs_counter
+# bombs_counter, left
 bombs_counter_str = tk.StringVar()
 bombs_counter_str.set(g.BOMBS_LEFT)
-bombs_counter = tk.Label(   top_frame, height=1, bg='white', 
-                            textvariable=bombs_counter_str)
-bombs_counter.pack(padx=5, pady=5, side=tk.LEFT)
+bombs_counter = tk.Label(   top_frame, height=1, width=4, bg='white', 
+                            textvariable=bombs_counter_str, 
+                            font=tkf.Font(weight='bold', size=10))
+bombs_counter.grid(row=0, column=0, padx=5, sticky=tk.W)
 
-# time counter
+def new_game():
+    return
+# new game button, middle
+newgame_button = tk.Button(top_frame, bd=1, text="New game", command=new_game)
+newgame_button.grid(row=0, column=1, padx=3, sticky=tk.E)
+
+# help button, middle
+def disp_help():
+    return
+help_button = tk.Button(top_frame, bd=1, text="Help", command=disp_help)
+help_button.grid(row=0, column=2, padx=3, sticky=tk.W)
+
+# time counter, right
 time_counter_str = tk.StringVar()
-time_counter = tk.Label(top_frame, height=1, bg='white',
-                        textvariable=time_counter_str)
-time_counter.pack(padx=5, pady=5, side = tk.RIGHT)
+time_counter = tk.Label(top_frame, height=1, width=4, bg='white',
+                        textvariable=time_counter_str,
+                        font=tkf.Font(slant='italic', size=10))
+time_counter.grid(row=0, column=3, padx=5, sticky=tk.E)
 
 def update_time():
     time_counter_str.set(int((time.time()-init_time)//1))

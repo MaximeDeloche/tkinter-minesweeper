@@ -35,6 +35,7 @@ TODO
 - add parameters for size / number of bombs
 - cf indicator of difficulty 3BV
 
+cf doc. p 51 and 52
 
 In MVC model :
 --------------
