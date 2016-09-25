@@ -23,6 +23,45 @@ FLAG = tk.PhotoImage(file="red_flag.gif")
 MINE = tk.PhotoImage(file="mine.gif")
 
 
+# Game frame ###################################################################
+game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
+
+def new_game():
+    global BOARD
+    global GRID
+
+    BOARD = [[cls.Square(i, j)  for j in range(g.WIDTH)] 
+                                for i in range(g.HEIGHT)]
+
+    def create_square(i, j):
+        f = tk.Frame(game_frame, height=25, width=25)
+        s = tk.Button(f, borderwidth=1, state="normal",disabledforeground="#000000")
+        s.pack(fill=tk.BOTH, expand=True)
+        
+        # buttons bindings
+        def __handler(event, x=i, y=j):
+            if event.num == 1:
+                handlers.left_handler(BOARD, GRID, x, y, MINE)
+            elif event.num == 3:
+                handlers.right_handler(BOARD, GRID, x, y, FLAG)
+                bombs_counter_str.set(g.BOMBS_LEFT)
+            else:
+                raise Exception('Invalid event code.')
+        s.bind("<Button-1>", __handler)
+        s.bind("<Button-3>", __handler)
+
+        f.pack_propagate(False)
+        # f.grid_propagate(False) # still useful ?
+        f.grid(row=i, column=j)
+        return s
+
+    GRID = [[create_square(i, j) for j in range(g.WIDTH)] for i in range(g.HEIGHT)]
+    utils.add_bombs(BOARD)
+    game_frame.pack(padx=10, pady=10, side=tk.BOTTOM)
+
+
+
+
 # Top frame (in a package ?) ###################################################
 top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
 top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
@@ -38,8 +77,18 @@ bombs_counter = tk.Label(   top_frame, height=1, width=4, bg='white',
 bombs_counter.grid(row=0, column=0, padx=5, sticky=tk.W)
 
 # new game button, middle left
+def reset_game():
+    global game_frame
+    global init_time
+    game_frame.destroy()
+    game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
+    g.BOMBS_LEFT = g.BOMBS
+    bombs_counter_str.set(g.BOMBS_LEFT)
+    init_time = time.time()
+    new_game()
+
 newgame_button = tk.Button( top_frame, bd=1, text="New game",
-                            command=utils.new_game)
+                            command=reset_game)
 newgame_button.grid(row=0, column=1, padx=1, sticky=tk.E)
 
 # options button, middle
@@ -64,38 +113,7 @@ def update_time():
 
 
 
-# Game frame ###################################################################
-game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
-
-BOARD = [[cls.Square(i, j)  for j in range(g.WIDTH)] 
-                            for i in range(g.HEIGHT)]
-
-def create_square(i, j):
-    f = tk.Frame(game_frame, height=25, width=25)
-    s = tk.Button(f, borderwidth=1, state="normal",disabledforeground="#000000")
-    s.pack(fill=tk.BOTH, expand=True)
-    
-    # buttons bindings
-    def __handler(event, x=i, y=j):
-        if event.num == 1:
-            handlers.left_handler(BOARD, GRID, x, y, MINE)
-        elif event.num == 3:
-            handlers.right_handler(BOARD, GRID, x, y, FLAG)
-            bombs_counter_str.set(g.BOMBS_LEFT)
-        else:
-            raise Exception('Invalid event code.')
-    s.bind("<Button-1>", __handler)
-    s.bind("<Button-3>", __handler)
-
-    f.pack_propagate(False)
-    # f.grid_propagate(False) # still useful ?
-    f.grid(row=i, column=j)
-    return s
-
-GRID = [[create_square(i, j) for j in range(g.WIDTH)] for i in range(g.HEIGHT)]
-utils.add_bombs(BOARD)
-game_frame.pack(padx=10, pady=10, side=tk.BOTTOM)
-
+new_game()
 utils.print_board(BOARD)
 
 init_time = time.time()
