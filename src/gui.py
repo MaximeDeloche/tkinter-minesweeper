@@ -89,16 +89,16 @@ def reset_game():
 
 newgame_button = tk.Button( top_frame, bd=1, text="New game",
                             command=reset_game)
-newgame_button.grid(row=0, column=1, padx=1, sticky=tk.E)
+newgame_button.grid(row=0, column=1, padx=0, sticky=tk.E)
 
 # options button, middle
 options_button = tk.Button( top_frame, bd=1, text="Options",
                             command=utils.options)
-options_button.grid(row=0, column=2, padx=1)
+options_button.grid(row=0, column=2, padx=0)
 
 # help button, middle right
 help_button = tk.Button(top_frame, bd=1, text="Help", command=utils.disp_help)
-help_button.grid(row=0, column=3, padx=1, sticky=tk.W)
+help_button.grid(row=0, column=3, padx=0, sticky=tk.W)
 
 # time counter, right
 time_counter_str = tk.StringVar()
