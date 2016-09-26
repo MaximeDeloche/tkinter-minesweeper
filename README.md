@@ -17,8 +17,8 @@ Widgets Structure
 - options window
 - help window
 
-In MVC model :
---------------
+In MVC model
+------------
 - *Model* = functions and data of the project
 - *View* = display model to the user
 - *Controller* = handle user input
@@ -31,3 +31,29 @@ In MVC model :
 - global_vars.py : contains global variables used everywhere
 	(ok, a bit dirty but by far the easiest way to share variables)
 - utils.py : various useful functions
+
+Needed classes
+--------------
+
+- Square : contains infos on a game square
+
+Attributes
+	coordinates
+	is_bomb
+	revealed
+	bombs_around
+
+Methods
+	reset
+	reveal
+
+- Grid : 2 dimensions tabular of squares
+
+Attributes
+	tab
+
+Methods
+	reset
+	add_bombs
+	(check_if_win)
+	
