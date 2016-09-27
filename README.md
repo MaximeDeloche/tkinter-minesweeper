@@ -32,6 +32,8 @@ In MVC model
 	(ok, a bit dirty but by far the easiest way to share variables)
 - utils.py : various useful functions
 
+Question : where to put functions that have to modify my gui ?
+
 Needed classes
 --------------
 

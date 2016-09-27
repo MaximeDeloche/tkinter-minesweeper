@@ -1,12 +1,10 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import tkinter as tk
-
 # Global variables for the current game ########################################
-HEIGHT = 5
-WIDTH = 5
-BOMBS = 5
+HEIGHT = 10
+WIDTH = 15
+BOMBS = 20
 BOMBS_LEFT = BOMBS
 SQUARES_REVEALED = 0
 
