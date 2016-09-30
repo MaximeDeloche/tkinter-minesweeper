@@ -29,7 +29,7 @@ def create_images():
 
 
 # Game frame ###################################################################
-def create_board(window, flag, mine):
+def create_board(window, GRID, flag, mine):
     game_frame = tk.Frame(window, borderwidth=2, relief=tk.SUNKEN)
 
     def create_square(i, j):
@@ -41,9 +41,9 @@ def create_board(window, flag, mine):
         # buttons bindings
         def __handler(event, x=i, y=j):
             if event.num == 1:
-                handlers.left_handler()
+                handlers.left_handler(GRID, BOARD, i, j, mine)
             elif event.num == 3:
-                handlers.right_handler()
+                handlers.right_handler(GRID, BOARD, i, j, flag)
             else:
                 raise Exception('Invalid event code.')
         s.bind("<Button-1>", __handler)
@@ -61,13 +61,13 @@ def create_board(window, flag, mine):
 
 # Top frame ####################################################################
 
-def create_top_frame(window):
+def create_top_frame(window, grid, board):
     top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
     top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
     for i in range(5):
         top_frame.columnconfigure(i, weight=1)
     create_bombs_counter(top_frame)
-    create_new_game_button(top_frame)
+    create_new_game_button(top_frame, grid, board)
     create_options_button(top_frame)
     create_help_button(top_frame)
     create_time_counter(top_frame)
@@ -83,10 +83,12 @@ def create_bombs_counter(top_frame):
     bombs_counter.grid(row=0, column=0, padx=5, sticky=tk.W)
 
 
-def create_new_game_button(top_frame):
+def create_new_game_button(top_frame, grid, board):
     """ new game button, middle left """
+    def _start_new_game(g=grid, b=board):
+        handlers.start_new_game(grid, board)
     newgame_button = tk.Button( top_frame, bd=1, text="New game",
-                                command='')
+                                command=_start_new_game)
     newgame_button.grid(row=0, column=1, padx=0, sticky=tk.E)
 
 
