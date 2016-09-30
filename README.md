@@ -23,6 +23,7 @@ In MVC model
 - *View* = display model to the user
 - *Controller* = handle user input
 
+
 - classes.py = *Model* : define structures of background board
 - gui.py = *View* : create and bind graphical elements
 - handlers.py = *Controller* : get click events and process them
@@ -34,21 +35,21 @@ In MVC model
 
 Needed classes
 --------------
-- _Square_ : contains infos on a game square
-	- *Attributes* :
-	- coordinates
-	- is_bomb
-	- revealed
-	- bombs_around
-	- *Methods* :
-	- reset
-	- reveal
+- *Square* : contains infos on a game square
+	- Attributes
+		- coordinates
+		- is_bomb
+		- revealed
+		- bombs_around
+	- Methods
+		- reset
+		- reveal
 
-- _Grid_ : 2 dimensions tabular of squares
-	- *Attributes* :
-	- tab
-	- *Methods* :
-	- reset
-	- add_bombs
-	- (check_if_win)
+- *Grid* : 2 dimensions tabular of squares
+	- Attributes
+		- tab
+	- Methods
+		- reset
+		- add_bombs
+		- (check_if_win)
 	
