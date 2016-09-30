@@ -32,30 +32,23 @@ In MVC model
 	(ok, a bit dirty but by far the easiest way to share variables)
 - utils.py : various useful functions
 
-Question : where to put functions that have to modify my gui ?
-
 Needed classes
 --------------
+- _Square_ : contains infos on a game square
+	- *Attributes* :
+	- coordinates
+	- is_bomb
+	- revealed
+	- bombs_around
+	- *Methods* :
+	- reset
+	- reveal
 
-- Square : contains infos on a game square
-
-Attributes
-	coordinates
-	is_bomb
-	revealed
-	bombs_around
-
-Methods
-	reset
-	reveal
-
-- Grid : 2 dimensions tabular of squares
-
-Attributes
-	tab
-
-Methods
-	reset
-	add_bombs
-	(check_if_win)
+- _Grid_ : 2 dimensions tabular of squares
+	- *Attributes* :
+	- tab
+	- *Methods* :
+	- reset
+	- add_bombs
+	- (check_if_win)
 	
