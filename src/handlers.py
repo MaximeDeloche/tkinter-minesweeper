@@ -4,6 +4,7 @@
 import tkinter as tk
 import tkinter.messagebox as tkmsg
 import sys
+import time
 
 import global_vars as g
 import utils
@@ -46,10 +47,12 @@ def right_handler(grid, board, i, j, flag):
 
 def end_game(win, grid, board):
     if win:
-        msg = "You won ! Good job.\nPlay again ?"
+        title = "You won !"
+        msg = "Good job. Play again ?"
     else:
-        msg = "You lost... \nTry again ?"
-    ans = tkmsg.askyesno(msg)
+        title = "You lost..."
+        msg = "Try again ?"
+    ans = tkmsg.askyesno(title, msg)
     if ans:
         start_new_game(grid, board)
     else:
@@ -62,18 +65,18 @@ def start_new_game(grid, board):
             grid.tab[x][y].reset()
             board[x][y]["image"] = ""
             board[x][y]["text"] = ""
-            board[x][y]["state"] = tk.NORMAL
+            board[x][y]["state"] = tk.DISABLED
             board[x][y]["relief"] = tk.RAISED
     grid.add_bombs()
     g.SQUARES_REVEALED = 0
     g.BOMBS_LEFT = g.BOMBS
-    for x in range(g.HEIGHT):
-        for y in range(g.WIDTH):
-            if board[x][y]["relief"] == tk.SUNKEN:
-                print("S", end='')
-            else:
-                print(".", end='')
-        print()
+    # for x in range(g.HEIGHT):
+    #     for y in range(g.WIDTH):
+    #         if board[x][y]["relief"] == tk.SUNKEN:
+    #             print("S", end='')
+    #         else:
+    #             print(".", end='')
+    #     print()
     print("\n")
     # grid.disp()
 

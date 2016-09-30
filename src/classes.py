@@ -43,7 +43,7 @@ class Grid():
     def add_bombs(self):
         """ Fill board squares with bombs """
         if g.BOMBS <= 0 or g.BOMBS >= g.HEIGHT*g.WIDTH:
-            raise Exception("Invalid number of g.BOMBS.")
+            raise Exception("Invalid number of bombs.")
         else:
             # sample makes random choices with distinct elements
             # we don't want several bombs on the same square
