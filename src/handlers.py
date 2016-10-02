@@ -71,13 +71,5 @@ def start_new_game(grid, board):
     g.SQUARES_REVEALED = 0
     g.BOMBS_LEFT = g.BOMBS
     g.INIT_TIME = time.time()
-    # for x in range(g.HEIGHT):
-    #     for y in range(g.WIDTH):
-    #         if board[x][y]["relief"] == tk.SUNKEN:
-    #             print("S", end='')
-    #         else:
-    #             print(".", end='')
-    #     print()
-    print("\n")
-    # grid.disp()
+    grid.disp()
 

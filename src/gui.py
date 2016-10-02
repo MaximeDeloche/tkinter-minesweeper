@@ -10,6 +10,7 @@ import classes as cls
 import utils
 import handlers
 import global_vars as g
+import gui_options
 
 
 # Main unresizable window ######################################################
@@ -100,7 +101,7 @@ def create_new_game_button(top_frame, grid, board):
 def create_options_button(top_frame):
     """ options button, middle """
     options_button = tk.Button( top_frame, bd=1, text="Options",
-                                command='')
+                                command=gui_options.start_options_window)
     options_button.grid(row=0, column=2, padx=0)
 
 
