@@ -21,38 +21,40 @@ Widgets Structure
 
 - help window
 
+Difference between root window and toplevel ?
+
 In MVC model
 ------------
-- *Model* = functions and data of the project
-- *View* = display model to the user
-- *Controller* = handle user input
+- **Model** = functions and data of the project
+- **View** = display model to the user
+- **Controller** = handle user input
 
 Files
 -----
-- classes.py = *Model* : define structures of background board
-- gui.py = *View* : create and bind graphical elements
-- handlers.py = *Controller* : get click events and process them
+- `classes.py` = *Model* : define structures of background board
+- `gui.py` = *View* : create and bind graphical elements
+- `handlers.py` = *Controller* : get click events and process them
 
-- main.py : create GUI, initialise background data and call mainloop
-- global_vars.py : contains global variables used everywhere (ok, a bit dirty but by far the easiest way to share variables)
-- utils.py : various useful functions
+- `main.py` : create GUI, initialise background data and call mainloop
+- `global_vars.py` : contains global variables used everywhere (ok, a bit dirty but by far the easiest way to share variables)
+- `utils.py` : various useful functions
 
 Needed classes
 --------------
-- *Square* : contains infos on a game square
-	- Attributes
+- **Square** : contains infos on a game square
+	- *Attributes*
 		- coordinates
 		- is_bomb
 		- revealed
 		- bombs_around
-	- Methods
+	- *Methods*
 		- reset
 		- reveal
 
-- *Grid* : 2 dimensions tabular of squares
-	- Attributes
+- **Grid** : 2 dimensions tabular of squares
+	- *Attributes*
 		- tab
-	- Methods
+	- *Methods*
 		- reset
 		- add_bombs
 		- (check_if_win)
