@@ -43,7 +43,6 @@ def right_handler(grid, board, i, j, flag):
             board[i][j]["state"] = "disabled"
             board[i][j]["image"] = ""
             g.BOMBS_LEFT += 1
-        # print(g.BOMBS_LEFT)
 
 
 def end_game(win, grid, board):
@@ -71,6 +70,7 @@ def start_new_game(grid, board):
     grid.add_bombs()
     g.SQUARES_REVEALED = 0
     g.BOMBS_LEFT = g.BOMBS
+    g.INIT_TIME = time.time()
     # for x in range(g.HEIGHT):
     #     for y in range(g.WIDTH):
     #         if board[x][y]["relief"] == tk.SUNKEN:

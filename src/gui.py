@@ -114,10 +114,9 @@ def create_help_button(top_frame):
 def create_time_counter(top_frame):
     """ time counter, right """
     time_counter_str = tk.StringVar()
-    init_time = time.time()
 
     def update_time_counter():
-        time_counter_str.set(int((time.time() - init_time)//1))
+        time_counter_str.set(int((time.time() - g.INIT_TIME)//1))
         top_frame.after(100, update_time_counter);
     update_time_counter();
 
