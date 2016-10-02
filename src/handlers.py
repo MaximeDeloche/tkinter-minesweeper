@@ -43,6 +43,7 @@ def right_handler(grid, board, i, j, flag):
             board[i][j]["state"] = "disabled"
             board[i][j]["image"] = ""
             g.BOMBS_LEFT += 1
+        # print(g.BOMBS_LEFT)
 
 
 def end_game(win, grid, board):

@@ -76,7 +76,12 @@ def create_top_frame(window, grid, board):
 def create_bombs_counter(top_frame):
     """ bombs_counter, left """
     bombs_counter_str = tk.StringVar()
-    bombs_counter_str.set(g.BOMBS_LEFT)
+
+    def update_bombs_counter():
+        bombs_counter_str.set(g.BOMBS_LEFT)
+        top_frame.after(100, update_bombs_counter)
+    update_bombs_counter()
+
     bombs_counter = tk.Label(   top_frame, height=1, width=4, bg='white', 
                                 textvariable=bombs_counter_str, 
                                 font=tkf.Font(weight='bold', size=10))
@@ -109,15 +114,15 @@ def create_help_button(top_frame):
 def create_time_counter(top_frame):
     """ time counter, right """
     time_counter_str = tk.StringVar()
+    init_time = time.time()
+
+    def update_time_counter():
+        time_counter_str.set(int((time.time() - init_time)//1))
+        top_frame.after(100, update_time_counter);
+    update_time_counter();
+
     time_counter = tk.Label(top_frame, height=1, width=4, bg='white',
                             textvariable=time_counter_str,
                             font=tkf.Font(slant='italic', size=10))
     time_counter.grid(row=0, column=4, padx=5, sticky=tk.E)
 
-
-# def update_time():
-#     time_counter_str.set(int((time.time()-init_time)//1))
-#     time_counter.after(100, update_time)
-#
-# init_time = time.time()
-# update_time()
