@@ -32,7 +32,7 @@ In MVC model
 Files
 -----
 - `classes.py` = *Model* : define structures of background board
-- `gui.py` = *View* : create and bind graphical elements
+- `gui.py`, `gui_options.py` and `gui_help.py` = *View* : create and bind graphical elements
 - `handlers.py` = *Controller* : get click events and process them
 
 - `main.py` : create GUI, initialise background data and call mainloop
