@@ -60,16 +60,27 @@ def end_game(win, grid, board):
 
 
 def start_new_game(grid, board):
-    for x in range(g.HEIGHT):
-        for y in range(g.WIDTH):
-            grid.tab[x][y].reset()
-            board[x][y]["image"] = ""
-            board[x][y]["text"] = ""
-            board[x][y]["state"] = tk.DISABLED
-            board[x][y]["relief"] = tk.RAISED
-    grid.add_bombs()
-    g.SQUARES_REVEALED = 0
-    g.BOMBS_LEFT = g.BOMBS
-    g.INIT_TIME = time.time()
-    grid.disp()
+    if  g.HEIGHT == g.NEXT_HEIGHT and # if options hasn't changed
+        g.WIDTH == g.NEXT_WIDTH and
+        g.BOMBS == g.NEXT_BOMBS:
+
+        for x in range(g.HEIGHT):
+            for y in range(g.WIDTH):
+                grid.tab[x][y].reset()
+                board[x][y]["image"] = ""
+                board[x][y]["text"] = ""
+                board[x][y]["state"] = tk.DISABLED
+                board[x][y]["relief"] = tk.RAISED
+        grid.add_bombs()
+        g.SQUARES_REVEALED = 0
+        g.BOMBS_LEFT = g.BOMBS
+        g.INIT_TIME = time.time()
+        grid.disp()
+
+    else: # if options has changed
+        return;
+        g.HEIGHT = g.NEXT_HEIGHT
+        g.WIDTH = g.NEXT_WIDTH
+        g.BOMBS = g.NEXT_BOMBS
+        grid.add_bombs()
 

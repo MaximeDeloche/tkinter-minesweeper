@@ -16,7 +16,7 @@ import gui_options
 # Main unresizable window ######################################################
 def create_main_window():
     window = tk.Tk()
-    window['bg'] = 'white'
+    window["bg"] = "white"
     window.resizable(width=False, height=False)
     return window
 
@@ -73,6 +73,7 @@ def create_top_frame(window, grid, board):
     create_help_button(top_frame)
     create_time_counter(top_frame)
     return top_frame
+
 
 def create_bombs_counter(top_frame):
     """ bombs_counter, left """

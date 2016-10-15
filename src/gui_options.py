@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import tkinter as tk
+import global_vars as g
 
 game_modes = [  ("Easy", 10, 10, 20),
                 ("Normal", 15, 20, 40),
@@ -9,16 +10,18 @@ game_modes = [  ("Easy", 10, 10, 20),
 
 def start_options_window():
     """ Display options window and update global variables """
-    options_window = tk.Tk()
-    options_window['bg'] = 'white'
+    options_window = tk.Toplevel(bg='white')
     options_window.resizable(width=False, height=False)
 
-    # choices
+    # choices radiobuttons
     choice = tk.IntVar()
     create_choices(options_window, choice)
 
     # validation button
     create_OK_button(options_window, choice)
+
+    # cancel button
+    create_cancel_button(options_window)
 
     # launch window
     options_window.mainloop()
@@ -36,13 +39,19 @@ def create_OK_button(window, choice):
     tk.Button(  window, borderwidth=1, 
                 text="OK", command=valid_changes).pack()
 
+def create_cancel_button(window):
+    def discard_changes():
+        window.destroy()
+    tk.Button(  window, borderwidth=1,
+                text="Cancel", command=discard_changes).pack()
+
 
 def set_new_values(mode, window):
-    print("Mode ", mode[0])
-    print("Height : ", mode[1])
-    print("Width : ", mode[2])
-    print("Bombs : ", mode[3])
+    g.NEXT_HEIGHT = mode[1]
+    g.NEXT_WIDTH = mode[2]
+    g.NEXT_BOMBS = mode[3]
     window.destroy()
 
 
-start_options_window()
+if __name__ == "__main__":
+    start_options_window()
