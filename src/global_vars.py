@@ -8,7 +8,7 @@ WIDTH = 15
 BOMBS = 20
 BOMBS_LEFT = BOMBS
 SQUARES_REVEALED = 0
-INIT_TIME = time.time()+1
+INIT_TIME = time.time()
 
 # Global variables for the next game ###########################################
 NEXT_HEIGHT = HEIGHT

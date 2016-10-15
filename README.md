@@ -21,7 +21,6 @@ Widgets Structure
 
 - help window
 
-Difference between root window and toplevel ?
 
 In MVC model
 ------------
