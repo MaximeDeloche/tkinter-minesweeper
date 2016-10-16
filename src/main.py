@@ -21,4 +21,10 @@ flag, mine = gui.create_images()
 BOARD = gui.create_board(window, GRID, flag, mine)
 top_frame = gui.create_top_frame(window, GRID, BOARD)
 
+# new idea
+# window = gui.create_main_window()
+# flag, mine = gui.create_images()
+#  create_new_game (window, flag, mine)
+# New Game Button would call 'create_new_game'
+
 tk.mainloop()

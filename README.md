@@ -58,3 +58,13 @@ Needed classes
 		- add_bombs
 		- (check_if_win)
 	
+
+Procedure when new game
+-----------------------
+- delete current BOARD
+- create new BOARD with new dimensions => create_board
+- delete current GRID
+- create new GRID with new dimensions => cls.Grid & add_bombs
+- init bombs_counter to 0
+- init time_counter to 0
+

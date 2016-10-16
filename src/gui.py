@@ -93,7 +93,8 @@ def create_bombs_counter(top_frame):
 def create_new_game_button(top_frame, grid, board):
     """ new game button, middle left """
     def _start_new_game(g=grid, b=board):
-        handlers.start_new_game(grid, board)
+        return;
+        # TODO
     newgame_button = tk.Button( top_frame, bd=1, text="New game",
                                 command=_start_new_game)
     newgame_button.grid(row=0, column=1, padx=0, sticky=tk.E)
