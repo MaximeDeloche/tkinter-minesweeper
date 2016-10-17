@@ -8,16 +8,11 @@ Widgets Structure
 	- top frame
 		- bombs counter
 		- new game button
-		- options button => options window
 		- help button => help window
 		- timer
 	- game frame
 		- squares of the game (= frames)
 			- button
-
-- options window
-	- Radiobuttons
-	- Valid and Cancel buttons
 
 - help window
 
@@ -31,7 +26,7 @@ In MVC model
 Files
 -----
 - `classes.py` = *Model* : define structures of background board
-- `gui.py`, `gui_options.py` and `gui_help.py` = *View* : create and bind graphical elements
+- `gui.py` = *View* : create and bind graphical elements
 - `handlers.py` = *Controller* : get click events and process them
 
 - `main.py` : create GUI, initialise background data and call mainloop
@@ -56,15 +51,5 @@ Needed classes
 	- *Methods*
 		- reset
 		- add_bombs
-		- (check_if_win)
 	
-
-Procedure when new game
------------------------
-- delete current BOARD
-- create new BOARD with new dimensions => create_board
-- delete current GRID
-- create new GRID with new dimensions => cls.Grid & add_bombs
-- init bombs_counter to 0
-- init time_counter to 0
 

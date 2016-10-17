@@ -10,7 +10,6 @@ import classes as cls
 import utils
 import handlers
 import global_vars as g
-import gui_options
 
 
 # Main unresizable window ######################################################
@@ -26,7 +25,6 @@ def create_images():
     flag = tk.PhotoImage(file="images/red_flag.gif")
     mine = tk.PhotoImage(file="images/mine.gif")
     return (flag, mine)
-
 
 
 # Game frame ###################################################################
@@ -65,11 +63,10 @@ def create_board(window, GRID, flag, mine):
 def create_top_frame(window, grid, board):
     top_frame = tk.Frame(window, borderwidth=2, height=40, relief=tk.GROOVE)
     top_frame.pack(padx=0, pady=0, side=tk.TOP, fill="x")
-    for i in range(5):
+    for i in range(4):
         top_frame.columnconfigure(i, weight=1)
     create_bombs_counter(top_frame)
     create_new_game_button(top_frame, grid, board)
-    create_options_button(top_frame)
     create_help_button(top_frame)
     create_time_counter(top_frame)
     return top_frame
@@ -93,23 +90,16 @@ def create_bombs_counter(top_frame):
 def create_new_game_button(top_frame, grid, board):
     """ new game button, middle left """
     def _start_new_game(g=grid, b=board):
-        return;
-        # TODO
-    newgame_button = tk.Button( top_frame, bd=1, text="New game",
+        handlers.start_new_game(grid, board)
+
+    newgame_button = tk.Button( top_frame, bd=1, width=15, text="New game",
                                 command=_start_new_game)
     newgame_button.grid(row=0, column=1, padx=0, sticky=tk.E)
 
 
-def create_options_button(top_frame):
-    """ options button, middle """
-    options_button = tk.Button( top_frame, bd=1, text="Options",
-                                command=gui_options.start_options_window)
-    options_button.grid(row=0, column=2, padx=0)
-
-
 def create_help_button(top_frame):
     """ help button, middle right """
-    help_button = tk.Button(top_frame, bd=1, text="Help", 
+    help_button = tk.Button(top_frame, bd=1, width=15, text="Help", 
                             command='')
     help_button.grid(row=0, column=3, padx=0, sticky=tk.W)
 
